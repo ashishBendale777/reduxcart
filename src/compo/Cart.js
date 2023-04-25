@@ -2,14 +2,15 @@ import React from 'react'
 import { Button, Card, Col, Row } from 'react-bootstrap'
 import '../cart.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { decreQty, increQty } from '../reduxwork/CartSlice'
+import { calculateTotal, decreQty, increQty } from '../reduxwork/CartSlice'
 
 
 const Cart = () => {
 
-  const { CartItems } = useSelector((state) => state.cart)
+  const { CartItems, CartTotalAmt } = useSelector((state) => state.cart)
   const dispatvher = useDispatch()
 
+  dispatvher(calculateTotal())
   return (
     <div>
       <Row>
@@ -26,7 +27,7 @@ const Cart = () => {
                   </Card.Body>
                   <Card.Footer>
                     <Button onClick={() => dispatvher(decreQty({ iid }))}>-</Button>
-                    {item.qty}
+                    <span className='fs-2 m-1'>{item.qty}</span>
                     <Button onClick={() => dispatvher(increQty({ iid }))}>+</Button>
                   </Card.Footer>
                 </Card>
@@ -36,7 +37,7 @@ const Cart = () => {
         }
       </Row>
       <Row>
-        <Col><h3>Total: 0</h3></Col>
+        <Col><h3>Total: {CartTotalAmt}</h3></Col>
         <Col><Button>Place Order</Button></Col>
       </Row>
     </div>

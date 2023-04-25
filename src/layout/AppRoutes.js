@@ -17,9 +17,21 @@ const AppRoutes = () => {
             <Container fluid>
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='/cart' element={<Cart />} />
-                    <Route path='/orders' element={<Orders />} />
-                    <Route path='/profile' element={<Profile />} />
+                    <Route path='/cart' element={
+                        <ProtectedRoute isSignin={true}>
+                            <Cart />
+                        </ProtectedRoute>
+                    } />
+                    <Route path='/orders' element={
+                        <ProtectedRoute isSignin={false}>
+                            <Orders />
+                        </ProtectedRoute>
+                    } />
+                    <Route path='/profile' element={
+                        <ProtectedRoute isSignin={true}>
+                            <Profile />
+                        </ProtectedRoute>
+                    } />
                     <Route path='/register' element={<Register />} />
                     <Route path='/login' element={<Login />} />
                 </Routes>

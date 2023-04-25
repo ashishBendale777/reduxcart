@@ -1,9 +1,12 @@
 import React from 'react'
 import { Badge, Container, Nav, Navbar } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 
 const MyNavbar = () => {
+
+    const { ItemCount } = useSelector((state) => state.cart)
 
     return (
         <div>
@@ -17,7 +20,7 @@ const MyNavbar = () => {
                                 <Link to="/">Home</Link>
                             </Nav.Link>
                             <Nav.Link>
-                                <Link to="/cart">My Cart <Badge>0</Badge> </Link>
+                                <Link to="/cart">My Cart <Badge className='m-2'>{ItemCount}</Badge> </Link>
 
                             </Nav.Link>
                             <Nav.Link>
